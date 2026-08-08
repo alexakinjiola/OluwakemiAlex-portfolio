@@ -79,15 +79,17 @@
           </div>
         </div>
 
-        <!-- Form -->
+        <!-- Form — powered by FormSubmit (no account/key needed).
+             Submissions email to the address in the action URL; the
+             client gets the _autoresponse reply automatically. -->
         <div class="reveal" data-delay="1">
-          <form class="form" novalidate>
-            <!-- Web3Forms config — replace with your own access key from https://web3forms.com -->
-            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-            <input type="hidden" name="subject" value="New enquiry from your portfolio website" />
-            <input type="hidden" name="from_name" value="Oluwakemi Alex — Portfolio" />
+          <form class="form" action="https://formsubmit.co/ajax/holuwakemi00@gmail.com" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New enquiry from your portfolio website" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_autoresponse" value="Hi there, and thank you for reaching out. I've received your message and will get back to you within one business day. In the meantime, feel free to reply to this email with anything else that would help. Warm regards, Oluwakemi Alex — Virtual Assistant" />
             <!-- Honeypot: hidden from people, catches bots -->
-            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <div class="field-row">
               <div class="field">

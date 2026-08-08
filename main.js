@@ -195,7 +195,7 @@
   var yr = document.querySelector("[data-year]");
   if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ---- 8. Contact form: send via Web3Forms (owner + auto-reply) ------ */
+  /* ---- 8. Contact form: send via FormSubmit (owner email + auto-reply) */
   var form = document.querySelector(".form");
   if (form) {
     var status = form.querySelector(".form-status");
@@ -242,10 +242,10 @@
       if (!name || !email || !msg) { fail("Please add your name, email, and a short note."); return; }
       if (!emailOk) { fail("That email address doesn't look right — mind double-checking it?"); return; }
 
-      var key = (data.get("access_key") || "").toString();
+      var action = form.getAttribute("action") || "";
 
-      // Graceful fallback until a Web3Forms key is added: open the email app.
-      if (!key || key.indexOf("YOUR_") === 0) {
+      // Fallback: no endpoint configured -> open the visitor's email app
+      if (!action) {
         var company = (data.get("company") || "").toString().trim();
         var subject = "New enquiry from " + name + (company ? " — " + company : "");
         var body = "Name: " + name + "\nEmail: " + email + "\n" +
@@ -256,20 +256,17 @@
         return;
       }
 
-      // Build JSON payload from all fields (includes access_key, subject, from_name, honeypot)
-      var payload = {};
-      data.forEach(function (v, k) { payload[k] = v; });
-
       setSending(true);
-      fetch("https://api.web3forms.com/submit", {
+      fetch(action, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(payload)
+        body: data,
+        headers: { "Accept": "application/json" }
       })
-        .then(function (r) { return r.json(); })
+        .then(function (r) { return r.json().catch(function () { return {}; }); })
         .then(function (res) {
           setSending(false);
-          if (res && res.success) { succeed(); form.reset(); }
+          var ok = res && (res.success === true || res.success === "true");
+          if (ok) { succeed(); form.reset(); }
           else { fail((res && res.message) ? res.message : "Something went wrong. Please try again, or email " + OWNER_EMAIL + " directly."); }
         })
         .catch(function () {
