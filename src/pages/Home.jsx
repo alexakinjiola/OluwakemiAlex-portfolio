@@ -8,7 +8,10 @@ import Portrait from '../components/Portrait.jsx'
 import AgendaCard from '../components/AgendaCard.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import StatsBand from '../components/StatsBand.jsx'
+import Marquee from '../components/Marquee.jsx'
 import ContactBlock from '../components/ContactBlock.jsx'
+import SplitText from '../motion/SplitText.jsx'
+import Parallax from '../motion/Parallax.jsx'
 
 const facts = [
   { icon: 'workspace_premium', title: '5 years', text: 'Experience' },
@@ -24,64 +27,73 @@ export default function Home() {
     <>
       {/* ---------- Hero ---------- */}
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-shape" aria-hidden="true" />
-        <div className="hero-leaf" aria-hidden="true" />
+        <Parallax className="hero-shape" speed={40} aria-hidden="true" />
+        <Parallax className="hero-leaf-wrap" speed={120} rotate={10} aria-hidden="true"><div className="hero-leaf sway" /></Parallax>
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <Reveal><p className="kicker">Hi, I’m Oluwakemi</p></Reveal>
-            <Reveal as="h1" className="display hero-title" id="hero-title" delay={1}>
-              The calm behind a <span className="script">busy</span> desk.
+            <Reveal className="hero-chip-row">
+              <span className="hero-chip"><span className="dot" aria-hidden="true" />{person.availability}</span>
             </Reveal>
-            <Reveal as="p" className="lead" delay={2}>
+            <Reveal as="p" className="kicker kicker--line" delay={1}>Hi, I’m Oluwakemi</Reveal>
+            <SplitText as="h1" className="display hero-title" id="hero-title" delay={0.15} stagger={0.08}>
+              The calm behind a <span className="script">busy</span> desk.
+            </SplitText>
+            <Reveal as="p" className="lead" delay={4}>
               I’m a virtual assistant who keeps inboxes clear, calendars honest and hiring pipelines
               moving, so founders and remote teams can spend their attention where it counts.
             </Reveal>
-            <Reveal className="hero-actions" delay={3}>
+            <Reveal className="hero-actions" delay={5}>
               <Button to="/contact">Work with me</Button>
               <Button to="/services" variant="link" icon={null}>
                 <span className="circle-icon" aria-hidden="true"><Icon name="east" /></span>
                 See how I help
               </Button>
             </Reveal>
-            <Reveal className="trusted" delay={4}>
+            <Reveal className="trusted" delay={6}>
               <ul className="trusted-marks" aria-hidden="true">
                 {companies.map((c) => <li key={c}>{c[0]}</li>)}
               </ul>
               <p>Trusted by teams at <b>{companies.slice(0, -1).join(', ')}</b> and <b>{companies.at(-1)}</b></p>
             </Reveal>
           </div>
-          <Reveal className="hero-media" delay={2}>
+          <div className="hero-media">
             <Portrait />
-          </Reveal>
+          </div>
         </div>
+        <Reveal className="scroll-cue" delay={8} aria-hidden="true">
+          <span className="scroll-cue-line"><span /></span>
+          <span>Scroll</span>
+        </Reveal>
       </section>
+
+      <Marquee />
 
       {/* ---------- About ---------- */}
       <section className="section about-intro" aria-labelledby="about-intro-title">
         <div className="wrap about-grid">
-          <Reveal className="about-visual">
+          <Reveal className="about-visual" variant="scale">
             <AgendaCard />
           </Reveal>
-          <Reveal className="about-copy" delay={1}>
-            <p className="kicker">About me</p>
-            <h2 className="h2" id="about-intro-title">
-              I’m all about calm systems, clear updates and nothing slipping.
-            </h2>
-            <p>
+          <div className="about-copy">
+            <Reveal as="p" className="kicker kicker--line"><span className="kicker-num">01</span>About me</Reveal>
+            <SplitText as="h2" className="h2" id="about-intro-title">
+              I’m all about calm systems, clear updates and nothing <em>slipping</em>.
+            </SplitText>
+            <Reveal as="p" delay={2}>
               I trained as a teacher and found my craft in keeping things in order. For five years I’ve supported
               founders and companies across Nigeria and the UK, taking the scattered, time-consuming parts of a busy
               role and turning them into something quiet and dependable.
-            </p>
-            <Button to="/about" variant="olive">More about me</Button>
-          </Reveal>
-          <Reveal as="ul" className="about-facts" delay={2}>
-            {facts.map((f) => (
-              <li key={f.title}>
-                <Icon name={f.icon} />
+            </Reveal>
+            <Reveal delay={3}><Button to="/about" variant="olive">More about me</Button></Reveal>
+          </div>
+          <ul className="about-facts">
+            {facts.map((f, i) => (
+              <Reveal as="li" key={f.title} delay={i + 2}>
+                <span className="af-icon"><Icon name={f.icon} /></span>
                 <span><b>{f.title}</b><small>{f.text}</small></span>
-              </li>
+              </Reveal>
             ))}
-          </Reveal>
+          </ul>
         </div>
       </section>
 
@@ -91,29 +103,30 @@ export default function Home() {
           <SectionHead
             id="services-title"
             align="center"
+            num="02"
             eyebrow="Services"
-            title="How I can take work off your plate."
+            title={<>How I can take work <em>off your plate</em>.</>}
+            intro="Four things I own end-to-end, with the systems and follow-through to make them disappear from your worry list."
           />
           <div className="grid-4">
             {services.map((s, i) => (
               <Reveal key={s.id} delay={i + 1} className="h-full">
-                <ServiceCard service={s} />
+                <ServiceCard service={s} index={i + 1} />
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ---------- Stats ---------- */}
       <StatsBand />
 
       {/* ---------- Process ---------- */}
       <section className="section" aria-labelledby="process-title">
         <div className="wrap">
-          <SectionHead id="process-title" align="center" eyebrow="How we’d start" title="Simple to begin. Easy to keep." />
+          <SectionHead id="process-title" align="center" num="03" eyebrow="How we’d start" title={<>Simple to begin. <em>Easy</em> to keep.</>} />
           <ol className="steps">
             {process.map((p, i) => (
-              <Reveal as="li" key={p.title} delay={i + 1} className="step">
+              <Reveal as="li" key={p.title} delay={i + 1} className="step spot">
                 <span className="step-icon"><Icon name={p.icon} /></span>
                 <span className="step-num">Step {i + 1}</span>
                 <h3 className="h4">{p.title}</h3>
@@ -124,10 +137,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- Why me panel ---------- */}
+      {/* ---------- Why me ---------- */}
       <section className="section section--flush-top" aria-labelledby="why-title">
         <div className="wrap">
-          <Reveal className="why-panel">
+          <Reveal className="why-panel" variant="scale">
             <div className="why-photo">
               <picture>
                 <source srcSet="/images/oluwakemi-cutout-600.webp" type="image/webp" />
@@ -135,8 +148,8 @@ export default function Home() {
               </picture>
             </div>
             <div className="why-copy">
-              <p className="kicker kicker--light">Why work with me</p>
-              <h2 className="h2" id="why-title">Support you never have to think about.</h2>
+              <p className="kicker kicker--line kicker--light"><span className="kicker-num">04</span>Why work with me</p>
+              <SplitText as="h2" className="h2" id="why-title">Support you never have to think about.</SplitText>
               <p>Clear updates, sensible questions and minimal supervision. You delegate once and move on with your day.</p>
               <Button to="/contact" variant="light">Start a conversation</Button>
             </div>
@@ -153,8 +166,9 @@ export default function Home() {
       </section>
 
       <ContactBlock
-        title={<>Have a busy week in mind? I’d love to hear about it.</>}
-        lead={`Tell me what’s on your plate and I’ll tell you exactly how I’d take it off. ${person.availability}.`}
+        num="05"
+        title={<>Have a busy week in mind? I’d love to <em>hear about it</em>.</>}
+        lead="Tell me what’s on your plate and I’ll tell you exactly how I’d take it off."
       />
     </>
   )

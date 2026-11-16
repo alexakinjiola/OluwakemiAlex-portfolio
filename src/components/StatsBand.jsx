@@ -1,5 +1,7 @@
 import Icon from './Icon.jsx'
 import Reveal from './Reveal.jsx'
+import CountUp from '../motion/CountUp.jsx'
+import Parallax from '../motion/Parallax.jsx'
 
 const stats = [
   { icon: 'workspace_premium', value: '5', unit: 'yrs', label: 'Admin & remote support' },
@@ -11,19 +13,19 @@ const stats = [
 export default function StatsBand() {
   return (
     <section className="stats-band" aria-label="Results at a glance">
-      <div className="stats-leaf" aria-hidden="true" />
+      <Parallax className="stats-leaf-wrap" speed={40} rotate={8} aria-hidden="true"><div className="stats-leaf sway" /></Parallax>
       <div className="wrap">
-        <Reveal as="ul" className="stats">
-          {stats.map((s) => (
-            <li key={s.label}>
+        <ul className="stats">
+          {stats.map((s, i) => (
+            <Reveal as="li" key={s.label} delay={i + 1}>
               <Icon name={s.icon} className="stats-icon" />
               <span>
-                <b>{s.value}<span className="unit">{s.unit}</span></b>
+                <b><CountUp value={s.value} /><span className="unit">{s.unit}</span></b>
                 <small>{s.label}</small>
               </span>
-            </li>
+            </Reveal>
           ))}
-        </Reveal>
+        </ul>
       </div>
     </section>
   )

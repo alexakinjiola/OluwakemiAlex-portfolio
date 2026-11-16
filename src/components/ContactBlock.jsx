@@ -2,16 +2,17 @@ import { person } from '../data/site.js'
 import ContactForm from './ContactForm.jsx'
 import Icon from './Icon.jsx'
 import Reveal from './Reveal.jsx'
+import SplitText from '../motion/SplitText.jsx'
 
-export default function ContactBlock({ eyebrow = 'Let’s work together', title, lead }) {
+export default function ContactBlock({ eyebrow = 'Let’s work together', num, title, lead }) {
   return (
     <section className="section section--flush-top contact-block" aria-labelledby="contact-block-title">
       <div className="wrap">
-        <Reveal className="contact-shell">
+        <Reveal className="contact-shell" variant="scale">
           <div className="contact-aside">
             <div className="contact-leaf" aria-hidden="true" />
-            <p className="kicker">{eyebrow}</p>
-            <h2 className="h2" id="contact-block-title">{title}</h2>
+            <p className="kicker kicker--line">{num && <span className="kicker-num">{num}</span>}{eyebrow}</p>
+            <SplitText as="h2" className="h2" id="contact-block-title">{title}</SplitText>
             {lead && <p className="contact-lead">{lead}</p>}
             <ul className="contact-list">
               <li>

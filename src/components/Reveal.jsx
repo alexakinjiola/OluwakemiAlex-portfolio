@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
+import { useIntro } from '../motion/intro.jsx'
 
-// Fades content up once as it enters the viewport. Respects reduced-motion via CSS.
-export default function Reveal({ as: Tag = 'div', delay = 0, className = '', children, ...rest }) {
+// Fades content up once as it enters the viewport (and, on first launch, once the intro has lifted).
+export default function Reveal({ as: Tag = 'div', delay = 0, variant = 'up', className = '', children, ...rest }) {
   const ref = useRef(null)
-  const [shown, setShown] = useState(false)
+  const { ready } = useIntro()
+  const [inView, setInView] = useState(false)
 
   useEffect(() => {
     const el = ref.current
-    if (!el || !('IntersectionObserver' in window)) { setShown(true); return }
+    if (!el || !('IntersectionObserver' in window)) { setInView(true); return }
     const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setShown(true); io.disconnect() }
+      if (entry.isIntersecting) { setInView(true); io.disconnect() }
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 })
     io.observe(el)
     return () => io.disconnect()
@@ -18,7 +20,7 @@ export default function Reveal({ as: Tag = 'div', delay = 0, className = '', chi
   return (
     <Tag
       ref={ref}
-      className={`reveal${shown ? ' is-in' : ''}${className ? ` ${className}` : ''}`}
+      className={`reveal reveal--${variant}${inView && ready ? ' is-in' : ''}${className ? ` ${className}` : ''}`}
       style={delay ? { '--d': `${delay * 90}ms` } : undefined}
       {...rest}
     >

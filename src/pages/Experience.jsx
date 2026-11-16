@@ -12,6 +12,7 @@ export default function Experience() {
   return (
     <>
       <PageHero
+        num="03"
         eyebrow="Experience"
         title={<>Five years of <em>handled</em>.</>}
         lead="A track record of quiet, reliable support across the UK and Nigeria, from admin desks to remote recruitment."
@@ -27,7 +28,7 @@ export default function Experience() {
                   <p className="tl-date">{job.when}</p>
                   {job.current && <span className="chip chip--live"><span className="dot" aria-hidden="true" />Current role</span>}
                 </div>
-                <article className="tl-card">
+                <article className="tl-card spot">
                   <header className="tl-head">
                     <div>
                       <h2 className="h4">{job.role}{job.note && <span className="tl-note"> ({job.note})</span>}</h2>

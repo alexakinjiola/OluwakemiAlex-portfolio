@@ -16,16 +16,18 @@
   background: url('/images/hero-shape.svg') no-repeat center / 100% 100%;
   pointer-events: none;
 }
-.hero-leaf {
+.hero-leaf-wrap {
   position: absolute;
   left: -2.5rem;
   top: calc(var(--header-h) + 1rem);
   width: clamp(7rem, 11vw, 10rem);
+  pointer-events: none;
+}
+.hero-leaf {
   aspect-ratio: 240 / 300;
   background: url('/images/leaf.svg') no-repeat center / contain;
   opacity: .28;
-  transform: scaleX(-1) rotate(-10deg);
-  pointer-events: none;
+  scale: -1 1;
 }
 .hero-grid {
   position: relative;
@@ -97,15 +99,17 @@
           mask: linear-gradient(#000 0 0) top / 100% 56% no-repeat, radial-gradient(circle 42cqw at 50% calc(100% - 42cqw), #000 99.5%, transparent 100%);
 }
 .portrait-photo img { width: 100%; height: auto; }
-.portrait-leaf {
+.portrait-leaf-wrap {
   position: absolute;
   right: -1.5rem;
   bottom: -1rem;
   width: 8.5rem;
+  z-index: 3;
+}
+.portrait-leaf {
   aspect-ratio: 240 / 300;
   background: url('/images/leaf.svg') no-repeat center / contain;
-  transform: rotate(8deg);
-  z-index: 1;
+  rotate: 8deg;
 }
 .portrait-spark { position: absolute; color: var(--terra); font-size: 1.6rem; }
 .portrait-spark--a { left: 2%; top: 12%; }
@@ -122,7 +126,6 @@
   border-radius: var(--r-md);
   box-shadow: var(--shadow-md);
   line-height: 1.25;
-  animation: drift 7s ease-in-out infinite;
 }
 .float-card b { display: block; font-family: var(--display); font-weight: 500; font-size: 1.12rem; }
 .float-card small { display: block; font-size: .76rem; color: var(--muted); }
@@ -138,7 +141,6 @@
   gap: .15rem;
   width: 10.5rem;
   padding: .9rem 1rem .8rem;
-  animation-delay: -2.5s;
 }
 .fc-row { display: flex; align-items: center; justify-content: space-between; }
 .fc-trend { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--sage-soft); color: var(--olive-d); }
@@ -148,9 +150,11 @@
 .spark path:last-child { stroke: var(--olive); stroke-width: 2.4; fill: none; stroke-linecap: round; }
 .fc-foot { margin-top: .2rem; font-size: .7rem !important; }
 .float-card--status {
-  left: 50%;
+  left: 0;
+  right: 0;
+  width: max-content;
+  margin-inline: auto;
   bottom: -1.25rem;
-  transform: translateX(-50%);
   gap: .6rem;
   padding: .65rem 1.1rem;
   border-radius: var(--r-pill);
@@ -164,7 +168,7 @@
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-shape { width: 100%; height: 41%; top: auto; bottom: 0; background: var(--ivory); border-radius: 50% 50% 0 0 / 14% 14% 0 0; }
-  .hero-leaf { display: none; }
+  .hero-leaf-wrap { display: none; }
   .hero-media { padding-top: 1rem; padding-bottom: 1.5rem; }
   .portrait { width: min(84%, 25rem); }
 }
@@ -179,7 +183,7 @@
   .float-card--growth { right: -.5rem; top: auto; bottom: 34%; width: 7.4rem; }
   .float-card--growth b { font-size: 1.2rem; }
   .float-card--growth .spark, .fc-foot, .fc-trend { display: none !important; }
-  .portrait-leaf { width: 5rem; right: -.5rem; }
+  .portrait-leaf-wrap { width: 5rem; right: -.5rem; }
   .portrait-spark--a { left: 0; top: 18%; }
   .trusted { align-items: flex-start; }
 }
@@ -276,17 +280,19 @@ li:not(.is-done) > .agenda-check { color: var(--line-strong); }
   color: var(--white);
 }
 .stats-band { padding-block: clamp(2.4rem, 2rem + 2vw, 3.4rem); }
-.stats-leaf, .results-leaf {
+.stats-leaf-wrap, .results-leaf {
   position: absolute;
   right: -2rem;
-  top: 50%;
+  top: -1rem;
   width: clamp(8rem, 14vw, 12rem);
+  pointer-events: none;
+}
+.stats-leaf, .results-leaf {
   aspect-ratio: 240 / 300;
   background: url('/images/leaf.svg') no-repeat center / contain;
   filter: brightness(1.35) saturate(.7);
   opacity: .35;
-  transform: translateY(-50%) rotate(-20deg);
-  pointer-events: none;
+  rotate: -20deg;
 }
 .stats { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); }
 .stats li { display: flex; align-items: center; gap: 1rem; padding: .3rem 1.6rem; }

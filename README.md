@@ -17,6 +17,21 @@ npm run build    # production build in dist/
 - `src/components/`: shared pieces (nav, footer, contact form, cards, hero portrait)
 - `src/styles/tokens.css`: colours, type scale, radii and shadows, all drawn from the portrait
 
+## Motion
+
+- **First-launch intro** (`src/components/Intro.jsx`): plays once per browser, then never again.
+  Add `?intro` to any URL to replay it. Skippable with the button or Escape, and skipped entirely
+  when the visitor prefers reduced motion.
+- **Effects** live in `src/motion/`: smooth scrolling (Lenis, desktop only), split-word heading reveals,
+  parallax, count-up numbers, spotlight cards and magnetic buttons. Page transitions are in `Layout.jsx`.
+- Everything respects `prefers-reduced-motion`.
+
+## Logo
+
+`src/components/Logo.jsx` holds the OA seal (an italic O cradling an upright A) and the full lockup.
+The letters are real vector outlines from Fraunces, stored in `markPaths.js`, so the mark renders the
+same everywhere. `public/favicon.svg` is the solid version.
+
 Icons are Google Material Symbols (Rounded). Only the icons in use are downloaded. If you add one,
 add its name to the `icon_names` list in `index.html` (alphabetical order).
 

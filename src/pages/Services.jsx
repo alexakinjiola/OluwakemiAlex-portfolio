@@ -13,6 +13,7 @@ export default function Services() {
   return (
     <>
       <PageHero
+        num="02"
         eyebrow="Services"
         title={<>Everything that keeps a busy role <em>running</em>.</>}
         lead="Pick the pieces you need most, or hand me the whole back office. Here’s the full range."
@@ -51,7 +52,7 @@ export default function Services() {
           <SectionHead id="tools-title" align="center" eyebrow="Tools I work in" title="Comfortable across the everyday stack." />
           <div className="grid-4">
             {tools.map((t, i) => (
-              <Reveal key={t.title} delay={i + 1} className="tool-card">
+              <Reveal key={t.title} delay={i + 1} className="tool-card spot">
                 <div className="tool-head">
                   <span className="tool-icon"><Icon name={t.icon} /></span>
                   <h3 className="h5">{t.title}</h3>
