@@ -218,7 +218,15 @@ html.is-intro, html.is-intro body { overflow: hidden; }
 /* =====================================================================
    Text reveals
    ===================================================================== */
-.split .sw { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.split .sw {
+  display: inline-block;
+  vertical-align: top;
+  /* The mask only exists while the word rises; it is released afterwards so italic
+     overhangs and descenders are never trimmed (and iOS can't leave a word stuck). */
+  clip-path: inset(-0.1em -0.3em -0.18em -0.3em);
+  transition: clip-path 0s linear 1.4s;
+}
+.split.is-in .sw { clip-path: inset(-1em -1em -1em -1em); }
 .split .sw-in {
   display: inline-block;
   transform: translateY(105%);
@@ -227,7 +235,7 @@ html.is-intro, html.is-intro body { overflow: hidden; }
 .split.is-in .sw-in { transform: none; }
 /* Script and italic accents rise with a soft rotation */
 .split .sw-in > .script, .split .sw-in > em { display: inline-block; }
-.split .sw:has(.script) { overflow: visible; }
+.split .sw:has(.script) { clip-path: none; }
 .split .sw:has(.script) .sw-in { transform: translateY(40%) rotate(-6deg); opacity: 0; transition: transform 1.2s var(--rise), opacity .9s var(--ease); }
 .split.is-in .sw:has(.script) .sw-in { transform: none; opacity: 1; }
 
@@ -537,4 +545,13 @@ html.is-intro, html.is-intro body { overflow: hidden; }
 @supports (backdrop-filter: blur(1px)) {
   .site-header.is-scrolled .nav,
   .site-header.is-open .nav { backdrop-filter: saturate(1.8) blur(20px); background: rgba(255, 255, 255, .88); }
+}
+
+/* Short screens (small phones, landscape): keep every menu link visible without scrolling. */
+.mobile-menu { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+@media (max-height: 560px) {
+  .mobile-menu { padding-top: calc(var(--header-h) + .25rem); padding-bottom: 1rem; }
+  .mobile-menu ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+  .mobile-menu ul a { font-size: 1.45rem; padding: .7rem 0; }
+  .mm-foot { padding-top: 1rem; grid-auto-flow: column; justify-content: space-between; align-items: center; }
 }
