@@ -5,12 +5,12 @@ import Reveal from './Reveal.jsx'
 
 export default function ContactBlock({ eyebrow = 'Let’s work together', title, lead }) {
   return (
-    <section className="section contact-block" aria-labelledby="contact-block-title">
+    <section className="section section--flush-top contact-block" aria-labelledby="contact-block-title">
       <div className="wrap">
         <Reveal className="contact-shell">
           <div className="contact-aside">
             <div className="contact-leaf" aria-hidden="true" />
-            <p className="eyebrow">{eyebrow}</p>
+            <p className="kicker">{eyebrow}</p>
             <h2 className="h2" id="contact-block-title">{title}</h2>
             {lead && <p className="contact-lead">{lead}</p>}
             <ul className="contact-list">
@@ -24,7 +24,7 @@ export default function ContactBlock({ eyebrow = 'Let’s work together', title,
               </li>
               <li>
                 <span className="ci"><Icon name="location_on" /></span>
-                <span><small>Based in</small>{person.location}, working with teams anywhere</span>
+                <span><small>Location</small>{person.location}, Nigeria</span>
               </li>
             </ul>
           </div>

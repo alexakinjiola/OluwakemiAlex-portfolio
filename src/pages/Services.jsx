@@ -18,7 +18,8 @@ export default function Services() {
         lead="Pick the pieces you need most, or hand me the whole back office. Here’s the full range."
       />
 
-      <section className="section section--flush-top" aria-label="Service list">
+      <section className="section section--flush-top" aria-labelledby="service-list-title">
+        <h2 className="sr-only" id="service-list-title">Service list</h2>
         <div className="wrap grid-2">
           {services.map((s, i) => (
             <Reveal key={s.id} id={s.id} delay={(i % 2) + 1} className="anchor-target">
@@ -35,8 +36,8 @@ export default function Services() {
           <ol className="steps steps--dark">
             {process.map((p, i) => (
               <Reveal as="li" key={p.title} delay={i + 1} className="step">
-                <span className="step-num" aria-hidden="true">0{i + 1}</span>
                 <span className="step-icon"><Icon name={p.icon} /></span>
+                <span className="step-num">Step {i + 1}</span>
                 <h3 className="h4">{p.title}</h3>
                 <p>{p.text}</p>
               </Reveal>

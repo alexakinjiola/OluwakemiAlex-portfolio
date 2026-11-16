@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <section className="page-hero not-found">
       <div className="wrap">
-        <p className="eyebrow">404</p>
+        <p className="kicker">404</p>
         <h1 className="display page-title">This page has been <em>filed away</em>.</h1>
         <p className="lead">The link may be old, or the page has moved. Let’s get you back somewhere useful.</p>
         <div className="hero-actions">
