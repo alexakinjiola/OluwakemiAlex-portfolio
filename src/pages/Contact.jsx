@@ -18,6 +18,7 @@ export default function Contact() {
   return (
     <>
       <PageHero
+        num="04"
         eyebrow="Contact"
         title={<>Let’s take the busywork <em>off your plate</em>.</>}
         lead="Tell me a little about your role and what’s slowing you down. I usually reply within a day."

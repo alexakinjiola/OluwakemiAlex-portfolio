@@ -13,6 +13,7 @@ export default function About() {
   return (
     <>
       <PageHero
+        num="01"
         eyebrow="About"
         title={<>Nice to meet you.<br />I’m <em>Oluwakemi</em>.</>}
         lead="A virtual assistant who believes the best support is the kind you never have to think about."
@@ -29,10 +30,10 @@ export default function About() {
 
       <section className="section story" aria-labelledby="story-title">
         <div className="wrap story-grid">
-          <Reveal as="figure" className="story-media">
+          <Reveal as="figure" className="story-media" variant="mask">
             <div className="story-arch">
               <picture>
-                <source srcSet="/images/oluwakemi-600.webp 600w, /images/oluwakemi.webp 900w" sizes="(max-width: 900px) 90vw, 480px" type="image/webp" />
+                <source srcSet="/images/oluwakemi-cutout-600.webp 600w, /images/oluwakemi-cutout.webp 900w" sizes="(max-width: 900px) 90vw, 480px" type="image/webp" />
                 <img src="/images/oluwakemi.jpg" alt="Portrait of Oluwakemi Mary Alex" width="900" height="1016" loading="lazy" decoding="async" />
               </picture>
             </div>
@@ -42,7 +43,7 @@ export default function About() {
           </Reveal>
 
           <Reveal className="story-copy" delay={1}>
-            <p className="eyebrow">The short version</p>
+            <p className="kicker">The short version</p>
             <h2 className="h2" id="story-title">I trained as a teacher. I found my craft in keeping things in order.</h2>
             <p>
               My degree from Obafemi Awolowo University is in Education and Chemistry, a background that taught me
@@ -63,13 +64,13 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section bg-cream" aria-labelledby="values-title">
+      <section className="section bg-ivory" aria-labelledby="values-title">
         <div className="wrap">
           <SectionHead id="values-title" align="center" eyebrow="How I work" title={<>Four things you can <em>count on</em>.</>} />
           <div className="grid-4">
             {values.map((v, i) => (
-              <Reveal key={v.title} delay={i + 1} className="value-card">
-                <span className="svc-icon svc-icon--bordeaux"><Icon name={v.icon} /></span>
+              <Reveal key={v.title} delay={i + 1} className="value-card spot">
+                <span className="svc-icon svc-icon--terra"><Icon name={v.icon} /></span>
                 <h3 className="h4">{v.title}</h3>
                 <p>{v.text}</p>
               </Reveal>
@@ -86,7 +87,7 @@ export default function About() {
           </div>
           <ol className="edu-list">
             {education.map((e, i) => (
-              <Reveal as="li" key={e.school} delay={i + 1} className="edu-item">
+              <Reveal as="li" key={e.school} delay={i + 1} className="edu-item spot">
                 <span className="edu-icon"><Icon name={i === education.length - 1 ? 'school' : 'verified'} /></span>
                 <div>
                   <p className="edu-year">

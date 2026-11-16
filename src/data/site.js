@@ -33,7 +33,7 @@ export const services = [
   {
     id: 'admin',
     icon: 'calendar_month',
-    tone: 'bordeaux',
+    tone: 'terra',
     title: 'Inbox & calendar',
     long: 'Administrative support',
     short: 'Triaged email, tidy scheduling and Calendly calls that never double-book. You open your day already sorted.',
@@ -43,7 +43,7 @@ export const services = [
   {
     id: 'recruitment',
     icon: 'person_search',
-    tone: 'espresso',
+    tone: 'olive',
     title: 'Recruitment support',
     long: 'Recruitment & hiring support',
     short: 'Sourcing and applications across Glassdoor, LinkedIn, ZipRecruiter and more, with interviews coordinated and feedback logged.',
@@ -53,7 +53,7 @@ export const services = [
   {
     id: 'content',
     icon: 'campaign',
-    tone: 'gilt',
+    tone: 'terra',
     title: 'Social & content',
     long: 'Social media & content',
     short: 'Content calendars planned and posted, blogs uploaded, captions written. A steady presence that keeps a brand visible.',
@@ -63,7 +63,7 @@ export const services = [
   {
     id: 'records',
     icon: 'folder_open',
-    tone: 'sage',
+    tone: 'olive',
     title: 'Admin & records',
     long: 'Data & records',
     short: 'Documents organised, databases kept current, reports prepared. The quiet clerical backbone a team can trust.',
